@@ -16,9 +16,8 @@ h1{display: flex;
 padding-left: 30%;
 text-decoration: underline ;}
 
-section{display: flex;
-padding-left: 50%;
-padding-top: 30px;
-}
+
+.cardpt1, .cardpt2{display: flex;
+justify-content: center;}
 
 button{margin: 10px;}
