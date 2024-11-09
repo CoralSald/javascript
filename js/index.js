@@ -35,12 +35,10 @@ const PRODUCTOS_ARRAY = [
 
 function mostrar_PRODUCTOS() {
     const section_productos = document.getElementById('productos');
-
     PRODUCTOS_ARRAY.forEach(producto => {
         const CARD_DIV = document.createElement('div');
         CARD_DIV.className = 'card-container';
-
-        const productoHTML = `
+        CARD_DIV.innerHTML = `
             <h3>${producto.nombre}</h3>
             <p>Precio: $${producto.precio}</p>
             <p>Tipo: ${producto.tipo}</p>
@@ -48,12 +46,53 @@ function mostrar_PRODUCTOS() {
             ${producto.tipo === "Buceo" ? `<p>Profundidad: ${producto.profundidad}</p>` : `<p>${producto.descripcion}</p>`}
             <button onclick="añadirCarrito(${producto.id})">Agregar al carrito</button>
         `;
-
-        CARD_DIV.innerHTML = productoHTML;
         section_productos.appendChild(CARD_DIV);
     });
 }
 
 function añadirCarrito(id) {
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || []
+    const CARRITO = JSON.parse(localStorage.getItem('carrito')) || [];
+    const producto = PRODUCTOS_ARRAY.find(prod => prod.id === id);
+    const productoEnCarrito = CARRITO.find(prod => prod.id === id); 
+    
+    if (productoEnCarrito) {
+        productoEnCarrito.cantidad += 1;
+    } else {
+        CARRITO.push({...producto, cantidad: 1});
+    }
+
+    localStorage.setItem('carrito', JSON.stringify(CARRITO));
+    mostrarCarrito(); 
 }
+
+function mostrarCarrito() {
+    const CARRITO = JSON.parse(localStorage.getItem('carrito')) || [];
+    const carritoList = document.getElementById('carrito');
+    carritoList.innerHTML = '';  
+
+    let total = 0;
+
+    CARRITO.forEach((producto, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            ${producto.nombre} - $${producto.precio} x ${producto.cantidad} 
+            <button onclick="eliminarDelCarrito(${index})">Eliminar del carrito</button>
+        `;
+        carritoList.appendChild(li);
+        total += producto.precio * producto.cantidad;
+    });
+
+    document.getElementById('total').textContent = `Total: $${total}`;
+}
+
+function eliminarDelCarrito(index) {
+    const CARRITO = JSON.parse(localStorage.getItem('carrito')) || [];
+    CARRITO.splice(index, 1);  
+    localStorage.setItem('carrito', JSON.stringify(CARRITO));  
+    mostrarCarrito();  
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    mostrar_PRODUCTOS();
+    mostrarCarrito();
+});
