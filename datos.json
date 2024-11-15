@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "nombre": "Buceo en Cancún",
+        "precio": 1200,
+        "tipo": "Buceo",
+        "duracion": "45 minutos",
+        "profundidad": "12 mts"
+    },
+    {
+        "id": 2,
+        "nombre": "Tour Cultural en Ciudad de México",
+        "precio": 500,
+        "tipo": "Tour",
+        "duracion": "8 horas",
+        "descripcion": "Visita los principales sitios turísticos de la ciudad"
+    },
+    {
+        "id": 3,
+        "nombre": "Buceo en Cozumel",
+        "precio": 1400,
+        "tipo": "Buceo",
+        "duracion": "50 minutos",
+        "profundidad": "15 mts"
+    },
+    {
+        "id": 4,
+        "nombre": "Tour por la Riviera Maya",
+        "precio": 800,
+        "tipo": "Tour",
+        "duracion": "10 horas",
+        "descripcion": "Explora las playas y ruinas mayas de la región"
+    }
+]
